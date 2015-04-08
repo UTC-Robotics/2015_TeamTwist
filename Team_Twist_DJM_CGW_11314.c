@@ -28,7 +28,7 @@ void configureClocks(void)
   BCSCTL2 = SELM_0 +  DIVM_0 + DIVS_0;                  //set MCLK and SMCLK sourced from DCO and div by 1????????????
   BCSCTL2 &= ~SELS;                                     //so 16Mhz system clock?????????????????
   
-}
+} // END configureClocks() 
 
 void configurePorts(void)
 {
@@ -65,14 +65,14 @@ void configurePorts(void)
   P1IE  = 0x08;                                         // Enable the interrupt from P1.3 (disable all other Port 1 pin interrupts)
   P1IES &= ~0x08;                                        // Set the interrupt to trigger on a low-to-high transition
   P1IFG = 0;                                            //clear P1 interrupt flag
-}
+} // END configurePorts() 
 
 void configureTimerISR(void)
 {
   TA0CTL = TASSEL_2 + MC_1;                             // Timer A0, source from SMCLK, count UP mode
   TA0CCR0 = 230;                                          // Set the compare register 0 to 640 cycles (toggle at 25kHz)????????????????
   TA0CCTL0 &= ~CCIE;                                      // Do Not Enable timer A interrup
-}
+} // END configureTimerISR() 
 
 void turnKnobs(int _knobSelect, int _knobSteps)
 {	
@@ -119,7 +119,7 @@ void turnKnobs(int _knobSelect, int _knobSteps)
     P2OUT &= ~0x10;                                        //p2.4 OFF - Lul EaS Right chopper back to sleep
     P2OUT &= ~0x08;                                        //p2.3 OFF - Lul Rubik's chopper back to sleep
     
-}
+} // END turnKnobs() 
 
 void main()
 {
@@ -213,4 +213,5 @@ void main()
   {
     chopStepCnt++;	                                       //step the mtoors by 1
     P1OUT ^= 0x10;                                         //toggle chopper step pin, p1.4
-  }
+  } // END MAIN 
+
